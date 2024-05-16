@@ -20,7 +20,8 @@ if st.button("Check Weather in Boston"):
             status = parts[0]  # The first part is the status
             temperature = parts[1][1:]  # Remove the "+" sign from temperature
             humidity = parts[2]
-            wind = parts[-1]  # Wind speed is the last part
+            wind_index = parts.index("←")  # Find the index of the "←" character
+            wind = parts[wind_index + 1]  # Wind speed is the part after the "←" character
             st.write(f"Weather in Boston:")
             st.write(f"Status: {status}")
             st.write(f"Temperature: {temperature} °F")
