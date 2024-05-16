@@ -16,10 +16,15 @@ if st.button("Check Weather in Boston"):
     st.write(f"Weather data response: {weather}")  # Add debug information
     if weather is not None:
         try:
-            parts = weather.split("←")  # Split at the "←" character
-            status, rest = parts[0].split(maxsplit=1)  # Split the first part into status and temperature
-            temperature, humidity, wind = rest.split()  # Split the rest into temperature, humidity, and wind
-            temperature = temperature[1:]  # Remove the "+" sign from temperature
+            # Split the weather response into parts based on spaces
+            parts = weather.split()
+
+            # Extract status, temperature, humidity, and wind speed
+            status = parts[0]  # First part is the status
+            temperature = parts[1][1:]  # Remove the "+" sign from temperature
+            humidity = parts[2]
+            wind = parts[4][1:-3]  # Remove the "mph" and special character "←" from wind speed
+
             st.write(f"Weather in Boston:")
             st.write(f"Status: {status}")
             st.write(f"Temperature: {temperature} °F")
