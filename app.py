@@ -1,14 +1,21 @@
 import requests
+import streamlit as st
 
 def fetch_github_repo(repo_url):
     response = requests.get(repo_url)
     if response.status_code == 200:
-        print("Repository details:")
-        print(response.json())
+        return response.json()
     else:
-        print(f"Failed to fetch repository details. Status code: {response.status_code}")
+        st.error(f"Failed to fetch repository details. Status code: {response.status_code}")
+        return None
 
-if __name__ == "__main__":
-    # URL of a public GitHub repository's API endpoint
-    repo_url = "https://api.github.com/repos/psf/requests"
-    fetch_github_repo(repo_url)
+st.title("GitHub Repository Details")
+
+# Input field for the GitHub repository API URL
+repo_url = st.text_input("Enter GitHub Repository API URL:", "https://api.github.com/repos/psf/requests")
+
+if st.button("Fetch Repository Details"):
+    repo_details = fetch_github_repo(repo_url)
+    if repo_details:
+        st.write("Repository details:")
+        st.json(repo_details)
