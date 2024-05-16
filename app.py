@@ -1,7 +1,7 @@
 import streamlit as st
 import emoji
 
-st.title("Streamlit App with Emoji Package")
+st.title("Streamlit Emoji Describer")
 
 emoji_list = [":smile:", ":heart:", ":rocket:", ":sun_with_face:", ":pizza:"]
 
