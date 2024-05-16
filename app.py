@@ -13,6 +13,7 @@ st.title("Boston Weather Checker")
 
 if st.button("Check Weather in Boston"):
     weather = get_weather_boston()
+    st.write(f"Weather data response: {weather}")  # Add debug information
     if weather is not None:
         try:
             status, temperature, humidity, wind = weather.split()
