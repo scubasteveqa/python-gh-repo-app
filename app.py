@@ -16,13 +16,17 @@ if st.button("Check Weather in Boston"):
     st.write(f"Weather data response: {weather}")  # Add debug information
     if weather is not None:
         try:
-            status, temperature, humidity, wind = weather.split()
+            parts = weather.split()
+            status = parts[0]  # The first part is the status
+            temperature = parts[1][1:]  # Remove the "+" sign from temperature
+            humidity = parts[2]
+            wind = parts[3][1:]  # Remove the "←" sign from wind speed
             st.write(f"Weather in Boston:")
             st.write(f"Status: {status}")
-            st.write(f"Temperature: {temperature}")
+            st.write(f"Temperature: {temperature} °F")
             st.write(f"Humidity: {humidity}")
-            st.write(f"Wind: {wind}")
-        except ValueError:
-            st.error("Failed to parse weather data. Please try again later.")
+            st.write(f"Wind: {wind} mph")
+        except Exception as e:
+            st.error(f"Failed to parse weather data: {e}")
     else:
         st.error("Failed to fetch weather data. Please try again later.")
