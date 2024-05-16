@@ -1,2 +1,2 @@
-git+https://github.com/psf/requests.git
+git+https://github.com/carpedm20/emoji.git
 streamlit
