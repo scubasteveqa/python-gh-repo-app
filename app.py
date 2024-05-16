@@ -20,7 +20,7 @@ if st.button("Check Weather in Boston"):
             status = parts[0]  # The first part is the status
             temperature = parts[1][1:]  # Remove the "+" sign from temperature
             humidity = parts[2]
-            wind = parts[-1][1:-3]  # Remove the "mph" and special character "←" from wind speed
+            wind = parts[-1]  # Wind speed is the last part
             st.write(f"Weather in Boston:")
             st.write(f"Status: {status}")
             st.write(f"Temperature: {temperature} °F")
