@@ -8,7 +8,10 @@ def get_exchange_rate():
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
-        return data["rates"][target_currency]
+        if "rates" in data and target_currency in data["rates"]:
+            return data["rates"][target_currency]
+        else:
+            return None
     else:
         return None
 
