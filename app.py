@@ -1,21 +1,24 @@
 import requests
 import streamlit as st
 
-def fetch_github_repo(repo_url):
-    response = requests.get(repo_url)
+def get_weather_boston():
+    url = "https://wttr.in/Boston?format=%C+%t+%h+%w"
+    response = requests.get(url)
     if response.status_code == 200:
-        return response.json()
+        return response.text
     else:
-        st.error(f"Failed to fetch repository details. Status code: {response.status_code}")
-        return None
+        return "Failed to fetch weather data"
 
-st.title("GitHub Repository Details")
+st.title("Boston Weather Checker")
 
-# Input field for the GitHub repository API URL
-repo_url = st.text_input("Enter GitHub Repository API URL:", "https://api.github.com/repos/psf/requests")
-
-if st.button("Fetch Repository Details"):
-    repo_details = fetch_github_repo(repo_url)
-    if repo_details:
-        st.write("Repository details:")
-        st.json(repo_details)
+if st.button("Check Weather in Boston"):
+    weather = get_weather_boston()
+    if "Failed to fetch weather data" in weather:
+        st.error(weather)
+    else:
+        status, temperature, humidity, wind = weather.split()
+        st.write(f"Weather in Boston:")
+        st.write(f"Status: {status}")
+        st.write(f"Temperature: {temperature}")
+        st.write(f"Humidity: {humidity}")
+        st.write(f"Wind: {wind}")
